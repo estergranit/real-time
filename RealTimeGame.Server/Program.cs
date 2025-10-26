@@ -1,4 +1,6 @@
-﻿using System.Net;
+﻿using RealTimeGame.Server.Handlers;
+using RealTimeGame.Server.Routing;
+using System.Net;
 using System.Net.WebSockets;
 using System.Text;
 
@@ -7,6 +9,10 @@ server.Prefixes.Add("http://localhost:5000/");
 server.Start();
 
 Console.WriteLine("WebSocket Server started on ws://localhost:5000/");
+
+var dispatcher = new MessageDispatcher();
+dispatcher.RegisterHandler("Echo", new EchoMessageHandler());
+
 
 while (true)
 {
@@ -35,8 +41,7 @@ while (true)
                 var message = Encoding.UTF8.GetString(buffer, 0, result.Count);
                 Console.WriteLine($"Received: {message}");
 
-                var responseBytes = Encoding.UTF8.GetBytes($"Echo: {message}");
-                await socket.SendAsync(responseBytes, WebSocketMessageType.Text, true, CancellationToken.None);
+                await dispatcher.DispatchAsync(socket, message);
             }
         }
     }
