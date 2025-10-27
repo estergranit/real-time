@@ -1,4 +1,5 @@
-﻿using System.Net.WebSockets;
+﻿using Serilog;
+using System.Net.WebSockets;
 using System.Text.Json;
 
 namespace RealTimeGame.Server.Routing
@@ -26,7 +27,7 @@ namespace RealTimeGame.Server.Routing
             }
             else
             {
-                Console.WriteLine($"Unknown message type: {type}");
+                Log.Logger.Warning($"Unknown message type: {type}");
             }
         }
     }
