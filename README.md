@@ -12,8 +12,8 @@ This version is focused on core real-time communication:
 - WebSocket server established and listening on `ws://localhost:5000/`
 - JSON message routing system
 - Echo handler to validate routing flow end-to-end
-
-✅ These capabilities are fully working and tested manually
+- ✅ Serilog structured logging integrated into WebSocket flow  
+  (replaces Console.WriteLine with structured logs)
 
 ---
 
@@ -75,5 +75,5 @@ ws://localhost:5000/
 
 The upcoming features in priority order:
 
-- [ ] Add Serilog structured logging to the server
 - [ ] Implement Login handler (DeviceId → PlayerId storage)
+- [ ] Update client console to support login request
